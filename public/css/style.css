@@ -98,3 +98,21 @@ display: flex;
     padding-left: 0;
     padding-right: 0;
 }
+/* .card,
+.card img,
+.listing-card,
+.listing-card img {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+} */
+ /* Remove borders only from listing cards */
+.listing-card,
+.listing-card img,
+.listing-card .card,
+.listing-card .card-img-top {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+

@@ -1,6 +1,6 @@
-if(process.env.NODE_ENV !="production"){
-  require('dotenv').config();
-}
+// if(process.env.NODE_ENV !="production"){
+//   require('dotenv').config();
+// }
 
 
 const express= require("express");
@@ -23,13 +23,14 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const { url } = require('inspector');
-
-const dbUrl = process.env.ATLASDB_URL;
+//one-
+//  const dbUrl = process.env.ATLASDB_URL;
+ const mongo_url="mongodb://127.0.0.1:27017/Wanderlust";
 main().then(()=>{
     console.log("Connection Successfull");})
 .catch((err)=>{console.log(err);});
 async function main() {
-    await  mongoose.connect(dbUrl);
+    await  mongoose.connect(mongo_url);
 }
 app.use(express.urlencoded({ extended: true }));
 app.use(express.urlencoded({extended:true}));
@@ -41,21 +42,22 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 app.use(express.static(path.join(__dirname, "public"))); 
 
-const store = MongoStore.create({
-    mongoUrl:dbUrl,
-    crypto:{
-      secret : process.env.SECRET,
-    },
-    touchAfter :24*3600,
-  });
+// const store = MongoStore.create({
+//     mongoUrl:dbUrl,
+//     crypto:{
+//       secret : process.env.SECRET,
+//     },
+//     touchAfter :24*3600,
+//   });
 
-  store.on("error",()=>{
-    console.log("ERROR IN MONGO SESSION STORE",err);
-  });
+//    store.on("error",()=>{
+//     console.log("ERROR IN MONGO SESSION STORE",err);
+//   });
 
 const sessionOptions = ({
-     store,
-     secret :  process.env.SECRET,
+      //- store,
+    secret: "mysuperlocalsecret",
+    //-  secret :  process.env.SECRET,
      resave:false ,
      saveUninitialized: true,
      cookie: {
