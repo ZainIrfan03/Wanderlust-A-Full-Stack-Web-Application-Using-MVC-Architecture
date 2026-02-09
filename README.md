@@ -17,7 +17,7 @@ Other Libraries: method-override, Joi (for validation), dotenv (for environment 
 
 ⚡ Key Features
 
-User Authentication & Authorization
+User Authentication & Authorization :
 
 Secure signup and login with Passport.js
 
@@ -25,7 +25,7 @@ Session-based authentication with cookies and flash messages
 
 Protected routes for authenticated users
 
-Listings Management
+Listings Management :
 
 Full CRUD (Create, Read, Update, Delete) for travel listings
 
@@ -33,7 +33,7 @@ Each listing includes location, description, pricing, and image placeholders
 
 Listings can be updated or deleted only by the owner
 
-Review System
+Review System :
 
 Users can post, edit, and delete reviews linked to listings
 
@@ -41,7 +41,7 @@ Nested routing (/listings/:id/reviews) ensures proper association
 
 Authorization ensures only review owners can modify content
 
-Server-Side Rendering & Dynamic Views
+Server-Side Rendering & Dynamic Views :
 
 EJS templates render dynamic content
 
@@ -49,7 +49,7 @@ Reusable layouts and partials (navbar, footer, flash messages) via EJS-Mate
 
 Responsive frontend with organized CSS and JS
 
-Error Handling & Validation
+Error Handling & Validation :
 
 Centralized error handling with ExpressError
 
@@ -57,26 +57,27 @@ Async route errors managed with WrapAsync utility
 
 Request validation with Joi prevents invalid or malicious data
 
-Prepared Cloud Integration
+Prepared Cloud Integration :
 
 Cloudinary setup included for future image upload support
 
 Ready for production-level media management
 
-Security & Usability
-
+Security & Usability :
+ 
 Input sanitization, authentication checks, and route authorization
 
 Flash messages improve user feedback and interface usability
 
 Method override supports PUT and DELETE HTTP methods via forms
 
-Scalable Architecture
+Scalable Architecture :
 
 MVC separation makes the project maintainable and extensible
 
 Controllers, models, and routes organized for team collaboration
-🔮 Future Improvements
+
+🔮 Future Improvements 
 
 Integrate Cloudinary for live image uploads.
 
