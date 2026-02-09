@@ -15,29 +15,67 @@ Session Management: express-session + connect-flash
 
 Other Libraries: method-override, Joi (for validation), dotenv (for environment management)
 
-⚡ Features
+⚡ Key Features
 
 User Authentication & Authorization
-Secure signup and login using Passport.js, session-based authentication, and flash messages for feedback.
+
+Secure signup and login with Passport.js
+
+Session-based authentication with cookies and flash messages
+
+Protected routes for authenticated users
 
 Listings Management
-Users can create, read, update, and delete travel listings with details like location, description, and images.
+
+Full CRUD (Create, Read, Update, Delete) for travel listings
+
+Each listing includes location, description, pricing, and image placeholders
+
+Listings can be updated or deleted only by the owner
 
 Review System
-Logged-in users can post, edit, and delete reviews for listings. Nested routes maintain proper relationships between listings and reviews.
 
-MVC Architecture
-Separate models (MongoDB schemas), views (EJS templates), and controllers (business logic) ensure maintainable and scalable code.
+Users can post, edit, and delete reviews linked to listings
 
-Server-Side Rendering & Dynamic Content
-EJS templates render dynamic data, and layouts are managed with EJS-Mate for reusability.
+Nested routing (/listings/:id/reviews) ensures proper association
+
+Authorization ensures only review owners can modify content
+
+Server-Side Rendering & Dynamic Views
+
+EJS templates render dynamic content
+
+Reusable layouts and partials (navbar, footer, flash messages) via EJS-Mate
+
+Responsive frontend with organized CSS and JS
 
 Error Handling & Validation
-Custom ExpressError class, WrapAsync utility, and Joi schemas validate inputs and manage application errors gracefully.
+
+Centralized error handling with ExpressError
+
+Async route errors managed with WrapAsync utility
+
+Request validation with Joi prevents invalid or malicious data
 
 Prepared Cloud Integration
-Cloudinary setup is included for future image upload support, making the project scalable for media handling.
 
+Cloudinary setup included for future image upload support
+
+Ready for production-level media management
+
+Security & Usability
+
+Input sanitization, authentication checks, and route authorization
+
+Flash messages improve user feedback and interface usability
+
+Method override supports PUT and DELETE HTTP methods via forms
+
+Scalable Architecture
+
+MVC separation makes the project maintainable and extensible
+
+Controllers, models, and routes organized for team collaboration
 🔮 Future Improvements
 
 Integrate Cloudinary for live image uploads.
