@@ -40,20 +40,20 @@ app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname, "public"))); 
 
 
-// const store = MongoStore.create({
-//     mongoUrl:dbUrl,
-//     crypto:{
-//       secret : process.env.SECRET,
-//     },
-//     touchAfter :24*3600,
-//   });
+const store = MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+      secret : process.env.SECRET,
+    },
+    touchAfter :24*3600,
+  });
 
-//    store.on("error",()=>{
-//     console.log("ERROR IN MONGO SESSION STORE",err);
-//   });
+   store.on("error",()=>{
+    console.log("ERROR IN MONGO SESSION STORE",err);
+  });
 
 const sessionOptions = ({
-      //- store,
+      store,
     secret: "mysuperlocalsecret",
     //-  secret :  process.env.SECRET,
      resave:false ,
