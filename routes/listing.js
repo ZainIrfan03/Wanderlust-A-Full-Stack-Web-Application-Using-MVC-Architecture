@@ -9,25 +9,46 @@ const {storage} =require("../cloudConfig.js");
 const upload = multer({ storage });
 
 
+//newroute
+router.get("/new", isLoggedIn,WrapAsync(listingController.renderNewForm));
+
 //index+create route
 router.route ("/")
 .get(WrapAsync(listingController.index))
 .post(
   isLoggedIn,
 
-  upload.single('listing[image]'),
+   upload.single('image'),
     validateListing,
   WrapAsync(listingController.createListing)) 
 
   
-//newroute
-router.get("/new", isLoggedIn,WrapAsync(listingController.renderNewForm));
+
+
+// 🔍 Step 3 — Search Route
+router.get("/search", WrapAsync(async (req, res) => {
+  const { q } = req.query;
+  if (!q) return res.redirect("/listings");
+
+  const listings = await Listing.find({
+    $or: [
+      { title: { $regex: q, $options: "i" } },
+      { description: { $regex: q, $options: "i" } },
+      { location: { $regex: q, $options: "i" } },
+      { country: { $regex: q, $options: "i" } },
+    ],
+  });
+
+  res.render("listings/searchResults", { listings, searchQuery: q });
+}));
 
 //show+update+delete
 router.route("/:id")
 .get( WrapAsync(listingController.showListing))
 
-.put(isLoggedIn,isOwner,upload.single('listing[image]'),  validateListing,
+.put(isLoggedIn,isOwner,
+  upload.single('image'), 
+   validateListing,
   WrapAsync(listingController.updateListing))
   
 .delete(isLoggedIn,isOwner,  WrapAsync(listingController.destroyListing));
