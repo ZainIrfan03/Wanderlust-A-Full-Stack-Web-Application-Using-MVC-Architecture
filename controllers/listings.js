@@ -35,12 +35,16 @@ const normalizeListingImage = (listing) => {
   }
 };
 
+module.exports.index = async (req, res) => {
+  const { category } = req.query;
+  let filter = {};
+  if (category) filter.category = category;
 
-module.exports.index = async (req,res)=>{
- const allListings= await Listing.find({});
-allListings.forEach(normalizeListingImage);
- res.render("listings/index.ejs",{allListings});
-}
+  const allListings = await Listing.find(filter);
+  allListings.forEach(normalizeListingImage);
+  res.render("listings/index.ejs", { allListings, selectedCategory: category || null });
+};
+
 
 module.exports.renderNewForm = async (req,res)=>{
 

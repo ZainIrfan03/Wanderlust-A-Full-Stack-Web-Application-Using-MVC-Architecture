@@ -51,6 +51,23 @@
                      required>
             </div>
 
+           <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select id="category" name="listing[category]" class="form-select" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="Trending">Trending</option>
+                    <option value="Rooms">Rooms</option>
+                    <option value="Farm">Farm</option>
+                    <option value="Iconic Cities">Iconic Cities</option>
+                    <option value="Mountains">Mountains</option>
+                    <option value="Amazing Pools">Amazing Pools</option>
+                    <option value="Camping">Camping</option>
+                    <option value="Arctic">Arctic</option>
+                    <option value="Hiking">Hiking</option>
+                </select>
+                <div class="invalid-feedback">Please select a category.</div>
+            </div>
+
             <!-- Price -->
              <div class="row">
             <div class="mb-3 col-md-4">

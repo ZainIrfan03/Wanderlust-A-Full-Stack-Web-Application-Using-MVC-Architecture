@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-// if(process.env.NODE_ENV !="production"){
-//   require('dotenv').config();
-// }
-=======
 if(process.env.NODE_ENV !="production"){
   require('dotenv').config();
 } //old
->>>>>>> b1a5c22 ( UI improvements and backend updates)
 
 
 const express= require("express");
@@ -30,18 +24,13 @@ const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const { url } = require('inspector');
 //one-
-<<<<<<< HEAD
-//  const dbUrl = process.env.ATLASDB_URL;
- const mongo_url="mongodb://127.0.0.1:27017/Wanderlust";
-=======
  const dbUrl = process.env.ATLASDB_URL;
 // const mongo_url="mongodb://127.0.0.1:27017/Wanderlust";
->>>>>>> b1a5c22 ( UI improvements and backend updates)
 main().then(()=>{
     console.log("Connection Successfull");})
 .catch((err)=>{console.log(err);});
 async function main() {
-    await  mongoose.connect(mongo_url);
+    await  mongoose.connect(dbUrl);
 }
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine","ejs");
@@ -50,16 +39,6 @@ app.use(methodOverride("_method"));
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname, "public"))); 
 
-<<<<<<< HEAD
-// const store = MongoStore.create({
-//     mongoUrl:dbUrl,
-//     crypto:{
-//       secret : process.env.SECRET,
-//     },
-//     touchAfter :24*3600,
-//   });
-
-=======
 
 // const store = MongoStore.create({
 //     mongoUrl:dbUrl,
@@ -69,7 +48,6 @@ app.use(express.static(path.join(__dirname, "public")));
 //     touchAfter :24*3600,
 //   });
 
->>>>>>> b1a5c22 ( UI improvements and backend updates)
 //    store.on("error",()=>{
 //     console.log("ERROR IN MONGO SESSION STORE",err);
 //   });

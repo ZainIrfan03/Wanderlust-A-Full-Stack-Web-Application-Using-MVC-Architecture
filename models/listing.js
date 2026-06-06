@@ -12,6 +12,11 @@ const listingSchema = new mongoose.Schema({
   price: Number,
   location: String,
   country: String,
+  category: {
+    type: String,
+    enum: ["Trending", "Rooms", "Farm", "Iconic Cities", "Mountains", "Amazing Pools", "Camping", "Arctic", "Hiking"],
+    default: "Trending"
+  },
   reviews :[
     {
       type: Schema.Types.ObjectId,

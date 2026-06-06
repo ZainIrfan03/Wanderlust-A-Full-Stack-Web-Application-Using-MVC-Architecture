@@ -27,10 +27,8 @@
 </div>
 
 <% if(currUser && listing.owner._id.equals(currUser._id)) {%>
-
   <div class="btns">
         <a href="/listings/<%= listing._id %>/edit "class="btn btn-dark col-1 offset-3 editbtn">Edit</a>
-        
         <form  method="post" action="/listings/<%= listing._id %>?_method=DELETE">
             <button class="btn btn-dark  offset-5">Delete</button>
         </form>
@@ -39,20 +37,13 @@
 
 
 <div class="col-8 offset-3 mb-3">
-  
   <% if(currUser) {%>
   <hr />
   <h4>Leave a Review : </h4>
   <form  action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
-<!-- <div class="mb-3 mt-3">
-  <label for="rating"  class="form-label">Rating</label>
-  <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
-</div> -->
 <div class="mb-3 mt-3">
   <label for="rating"  class="form-label">Rating</label>
 <fieldset class="starability-slot">
-  
-  
   <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
   <input type="radio" id="first-rate1" name="review[rating]" value="1" />
   <label for="first-rate1" title="Terrible">1 star</label>
@@ -75,7 +66,6 @@
   </form>
   <% } %>
 
-
 <% if(listing.reviews.length>0){  %> 
 <div class="row">
   <p><b>All Reviews</b></p>
@@ -85,9 +75,6 @@
     <h5 class="card-title">@<%= review.author.username %></h5>
     <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
     <p class="card-text"><%= review.comment %></p>
-     
-  
-
  <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="mb-3" method="POST">
   <button class="btn btn-sm btn-dark">Delete</button>
 </form>
@@ -99,25 +86,59 @@
 </div>
 
 </div>
-  <div class="col-6 offset-3 mb-3">
-  <h3>Where you'll be</h3>
+
+<!-- MAP SECTION -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  #map {
+    height: 350px;
+    width: 100%;
+    border-radius: 15px;
+    z-index: 0;
+  }
+</style>
+
+<div class="col-6 offset-3 mb-5">
+  <h4>Where you'll be</h4>
+  <p class="text-muted"><%= listing.location %>, <%= listing.country %></p>
   <div id="map"></div>
 </div>
-</div>
-<!-- <script>
-let mapToken = " process.env.MAP_TOKEN %>"
-mapboxgl.accessToken =mapToken;
-const map = new mapboxgl.Map({
-container: 'map', // container ID
-// Choose from Mapbox's core styles, or make your own style with Mapbox
-style: 'mapbox://styles/mapbox/streets-v12', // style URL
 
-center: [-74.5, 48], // starting position [ing, lati
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const locationQuery = "<%= listing.location %>, <%= listing.country %>";
 
-zoom: 9// starting zoom
+  // Use OpenStreetMap Nominatim to geocode the location
+  fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(locationQuery)}&format=json&limit=1`)
+    .then(res => res.json())
+    .then(data => {
+      let lat = 30.3753;  // default: Pakistan center
+      let lng = 69.3451;
+      let found = false;
 
-});
+      if (data && data.length > 0) {
+        lat = parseFloat(data[0].lat);
+        lng = parseFloat(data[0].lon);
+        found = true;
+      }
 
+      const map = L.map('map').setView([lat, lng], found ? 12 : 5);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19,
+      }).addTo(map);
+
+      L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(`<b><%= listing.title %></b><br><%= listing.location %>, <%= listing.country %>`)
+        .openPopup();
+    })
+    .catch(() => {
+      // fallback: show Pakistan if geocoding fails
+      const map = L.map('map').setView([30.3753, 69.3451], 5);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap',
+      }).addTo(map);
+    });
 </script>
-
- -->

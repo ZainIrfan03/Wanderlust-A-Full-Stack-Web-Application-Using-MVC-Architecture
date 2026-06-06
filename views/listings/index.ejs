@@ -33,57 +33,105 @@ visibility: hidden;
   align-items: center;
 }
 
+#filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+#filters a {
+  text-decoration: none;
+  color: black;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+
+.tax-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.form-check-label {
+  color: black;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+  .listing-card .card img {
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  display: block;
+}
+
+
+.listing-card .card {
+  border: 2px solid rgb(47, 46, 46) !important;
+  border-radius: 20px;
+  overflow: hidden;
+  
+}
+.listing-card .card-text {
+  padding-left: 10px;
+}
+
 </style>
 
 
 
-   <div id="filters">
-    <div class="filter">
+  <div id="filters">
+  <a href="/listings" class="filter <%= !selectedCategory ? 'active' : '' %>">
+    <div><i class="fa-solid fa-list"></i></div>
+    <p>All</p>
+  </a>
+  <a href="/listings?category=Trending" class="filter <%= selectedCategory === 'Trending' ? 'active' : '' %>">
     <div><i class="fa-solid fa-fire"></i></div>
     <p>Trending</p>
-    </div>
-    <div class="filter">
+  </a>
+  <a href="/listings?category=Rooms" class="filter <%= selectedCategory === 'Rooms' ? 'active' : '' %>">
     <div><i class="fa-solid fa-bed"></i></div>
     <p>Rooms</p>
-    </div>
-     <div class="filter">
+  </a>
+  <a href="/listings?category=Farm" class="filter <%= selectedCategory === 'Farm' ? 'active' : '' %>">
     <div><i class="fa-solid fa-house-user"></i></div>
     <p>Farm</p>
-    </div>
-    <div class="filter">
+  </a>
+  <a href="/listings?category=Iconic Cities" class="filter <%= selectedCategory === 'Iconic Cities' ? 'active' : '' %>">
     <div><i class="fa-solid fa-mountain-city"></i></div>
     <p>Iconic Cities</p>
-    </div>
-     <div class="filter">
+  </a>
+  <a href="/listings?category=Mountains" class="filter <%= selectedCategory === 'Mountains' ? 'active' : '' %>">
     <div><i class="fa-solid fa-mountain"></i></div>
     <p>Mountains</p>
-    </div>
-    <div class="filter">
+  </a>
+  <a href="/listings?category=Amazing Pools" class="filter <%= selectedCategory === 'Amazing Pools' ? 'active' : '' %>">
     <div><i class="fa-solid fa-person-swimming"></i></div>
     <p>Amazing Pools</p>
-    </div>
-     <div class="filter">
+  </a>
+  <a href="/listings?category=Camping" class="filter <%= selectedCategory === 'Camping' ? 'active' : '' %>">
     <div><i class="fa-solid fa-campground"></i></div>
     <p>Camping</p>
-    </div>
-    <div class="filter">
+  </a>
+  <a href="/listings?category=Arctic" class="filter <%= selectedCategory === 'Arctic' ? 'active' : '' %>">
     <div><i class="fa-solid fa-snowflake"></i></div>
     <p>Arctic</p>
-    </div>
-     <div class="filter">
+  </a>
+  <a href="/listings?category=Hiking" class="filter <%= selectedCategory === 'Hiking' ? 'active' : '' %>">
     <div><i class="fa-solid fa-person-hiking"></i></div>
     <p>Hiking</p>
-    </div>
-    
-    
-    
-    <div class="tax-toggle">
-      <div class="form-check-reverse form-switch">
+  </a>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
       <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
       <label class="form-check-label" for="flexSwitchCheckDefault">Display total after Taxes</label>
     </div>
-    </div>
-   </div>
+  </div>
+</div>
 
   <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
     <% for(let listing of allListings) { %>
@@ -127,6 +175,8 @@ taxSwitch.addEventListener("click", () => {
 });
 
 </script>
+
+
 
 
 
